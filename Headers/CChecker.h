@@ -4,6 +4,20 @@
 
 #include "CBoard.h"
 #include "IObjectState.h"
+
+namespace chapaevMath {
+    struct angle {
+        double DegAngle;
+        double RadAngle;
+
+        int Quarter;
+
+        void DegToRad() {
+        }
+    };
+}
+
+
 extern sf::RenderWindow window;
 
 static float CHECKER_OUTLINE_THICKNESS = 1.0;
@@ -17,6 +31,14 @@ const int USER_POSITION_Y = 7*CELL_SIZE;
 
 const int AI_OWNERSHIP = 2;
 const int AI_POSITION_Y = 0;
+
+const int NO_DIRECTION = 0;
+const int DIRECT_DIRECTION= 1;
+const int VERTICAL_DIRECTION = 2;
+const int HORIZONTAL_DIRECTION = 3;
+
+
+dot help_func(CChecker cur_checker, CChecker possible_collision_checker);
 
 class CChecker: public IDrawable, public IObjectState {
     int ownership;
@@ -36,6 +58,7 @@ public:
     int number;
     int time_v;
     int start_frame;
+    int moving_direction;
 
     dot clicked_dot;
     dot old_center;
@@ -48,8 +71,6 @@ public:
         number = n;
         ownership = own;
 
-        clicked = false;
-
         center.x = BOARD_POSITION_X + (CELL_SIZE) / 2 + number * CELL_SIZE;
         if (ownership == USER_OWNERSHIP) {
             center.y = BOARD_POSITION_Y + (CELL_SIZE) / 2 + USER_POSITION_Y;
@@ -60,9 +81,10 @@ public:
         destination_dot = clicked_dot = old_center = center;
         acceleration_x = acceleration_y = velocity_x = velocity_y = 0;
 
+        moving_direction = DIRECT_DIRECTION;
         time_v = start_frame = 0;
 
-        moving = selected = false;
+        clicked = moving = selected = false;
     }
     ~CChecker() {
 
@@ -80,8 +102,10 @@ public:
 
     void determine_acceleration();
     void determine_velocity();
+    void determine_destination_dot();
 
     void draw() override;
+    void draw_checker_center();
     void update_state(const int&) override;
 
     void change_select();

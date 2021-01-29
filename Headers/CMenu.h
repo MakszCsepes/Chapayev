@@ -51,5 +51,4 @@ public:
     bool check_item_on_presence(CMenuItem&);
 };
 
-
 #endif //CHAPAEV_CMENU_H

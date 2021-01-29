@@ -1,6 +1,6 @@
 #include "CWorld.h"
 
-sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Chapaev");
+sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Chapayev");
 
 void CWorld::draw_fps() {
     std::string text("FPS = " + std::to_string(float(fps)));

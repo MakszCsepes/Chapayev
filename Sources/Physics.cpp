@@ -63,3 +63,15 @@ int count_frames(double v, double a) {
 double count_way(double v, double a, int t) {
     return v*t + a*t*t/2;
 }
+
+double get_distance_between_dots(dot one, dot two) {
+    double distance;
+
+    dot A{one.x, one.y};
+    dot B{two.x, two.y};
+    vector_math AB = get_vector(A, B);
+
+    distance = get_module_of_vector(AB);
+
+    return distance;
+}

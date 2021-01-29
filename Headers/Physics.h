@@ -40,18 +40,10 @@ dot get_direction_end_dot(dot& clicked_dot, dot& center);
 int count_frames(double v, double a);
 double count_way(double v, double a, int t);
 
-
+double get_distance_between_dots(dot one, dot two);
 template <typename T>
 double get_distance_between(T& one, T& two) {
-    double distance;
-
-    dot A{one.center.x, one.center.y};
-    dot B{two.center.x, two.center.y};
-    vector_math AB = get_vector(A, B);
-
-    distance = get_module_of_vector(AB);
-
-    return distance;
+    return get_distance_between_dots(one.center, two.center);
 }
 
 #endif //CHAPAEV_PHYSICS_H

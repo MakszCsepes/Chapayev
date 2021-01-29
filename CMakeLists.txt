@@ -14,5 +14,5 @@ find_package(SFML 2.5.1 COMPONENTS system window graphics network audio)
 include_directories("Headers")
 file(GLOB CPPS "Sources/*.cpp")
 
-add_executable(${PROJECT_NAME} ${CPPS} Sources/Physics.cpp Headers/Physics.h Headers/CGame.h)
+add_executable(${PROJECT_NAME} ${CPPS} Sources/Physics.cpp Headers/Physics.h Headers/CGame.h Sources/CVector.cpp Headers/CVector.h)
 target_link_libraries(${PROJECT_NAME} sfml-audio sfml-graphics sfml-window sfml-system)

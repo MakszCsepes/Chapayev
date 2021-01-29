@@ -118,7 +118,6 @@ void CMenu::current_item_act_on(CWorld& game) {
 }
 
 void CMenu::define_offsets() {
-    // todo самый нижний отступ не равен верхнему
     double menu_space = MENU_HEIGHT;
     int item_quantity = menu_items.size();
     double occupied_space = item_quantity * MENU_ITEM_HEIGHT;
@@ -126,9 +125,10 @@ void CMenu::define_offsets() {
 
     int offsets = 2;
     int gap_quantity = item_quantity - 1;
+    double k = 1.5;
 
-    MENU_ITEM_GAP = free_space/(gap_quantity + offsets);
-    MENU_ITEM_OFFSET = MENU_ITEM_GAP/(gap_quantity/offsets);
+    MENU_ITEM_GAP = free_space/(offsets*k + (gap_quantity));
+    MENU_ITEM_OFFSET = MENU_ITEM_GAP*k;
 }
 void CMenu::define_menu_items_position() {
     int i = 1;

@@ -11,6 +11,27 @@ void CGame::update_state(const int &frame_number) {
 
     check_collision();
 }
+
+extern dot checker2_after_dot;
+extern dot checker1_after_dot;
+extern dot collision_dot;
+extern int AB_chet;
+extern int AC_chet;
+extern int AT_chet;
+
+void draw_end_dot(dot D, sf::Color color) {
+    if (D.x != 0 && D.y != 0) {
+        sf::CircleShape center_circle(RADIUS/5);
+        center_circle.setPosition(D.x - RADIUS/5, D.y - RADIUS/5);
+        center_circle.setFillColor(color);
+        window.draw(center_circle);
+    }
+}
+void draw_end_dots() {
+    draw_end_dot(checker2_after_dot, sf::Color::Green);
+    draw_end_dot(checker1_after_dot, sf::Color::Blue);
+    draw_end_dot(collision_dot, sf::Color::Red);
+}
 void CGame::draw() {
     using std::to_string;
 
@@ -38,16 +59,19 @@ void CGame::draw() {
     tmp_text.setPosition(BOARD_POSITION_X - 200, BOARD_POSITION_Y + 45);
     window.draw(tmp_text);
 
-    int i = 0;
-    for(auto iter = user->checkers.begin(); iter != user->checkers.end() ; iter++, i++) {
-        tmp_text.setString(to_string(i+1) + " - " + to_string(get_distance_between(*user->current_checker, *iter->get_itself())));
-        tmp_text.setPosition(BOARD_POSITION_X - 200, BOARD_POSITION_Y + 80 + i*20);
-        window.draw(tmp_text);
-    }
-
-    tmp_text.setString("RADIUS = " + to_string(RADIUS));
-    tmp_text.setPosition(BOARD_POSITION_X - 200, BOARD_POSITION_Y + 250);
+    tmp_text.setString("AB_chet = " + to_string(AB_chet));
+    tmp_text.setPosition(BOARD_POSITION_X - 200, BOARD_POSITION_Y + 60);
     window.draw(tmp_text);
+
+    tmp_text.setString("AC_chet = " + to_string(AC_chet));
+    tmp_text.setPosition(BOARD_POSITION_X - 200, BOARD_POSITION_Y + 75);
+    window.draw(tmp_text);
+
+    tmp_text.setString("AT_chet = " + to_string(AT_chet));
+    tmp_text.setPosition(BOARD_POSITION_X - 200, BOARD_POSITION_Y + 90);
+    window.draw(tmp_text);
+
+    draw_end_dots();
 }
 
 void CGame::keyboard_handler(sf::Event& event) {

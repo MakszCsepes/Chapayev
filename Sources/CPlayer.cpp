@@ -5,9 +5,6 @@ extern CWorld* game;
 
 bool is_in_list(const int checker_number, list<int> list) {
     for (auto iter = list.begin(); iter != list.end(); iter++) {
-        /*if (iter->get_itself()->number == checker->number) {
-            return true;
-        }*/
         if (*iter == checker_number) {
             return true;
         }
@@ -19,7 +16,7 @@ void CPlayer::check_collision(CPlayer* enemy, list<int>* already_checked) {
 
     for (auto iter = checkers.begin(); iter != checkers.end(); iter++) {
         if (iter->moving) {
-            // checking with player`s own checkers
+            // with player`s own checkers
             for (auto iter1 = checkers.begin(); iter1 != checkers.end(); iter1++) {
                 if (iter1->get_itself() != iter->get_itself()) {
                     if (!is_in_list(iter1->number, *already_checked)) {
@@ -27,7 +24,7 @@ void CPlayer::check_collision(CPlayer* enemy, list<int>* already_checked) {
                     }
                 }
             }
-            // checking with enemy`s checkers
+            // with enemy`s checkers
             for (auto iter2 = enemy->checkers.begin(); iter2 != enemy->checkers.end(); iter2++) {
                 if (!is_in_list(iter2->number, *already_checked)) {
                     iter->check_collision_with(iter2->get_itself());
@@ -193,6 +190,14 @@ void CPlayer::remove_from_checkers_list(CChecker& checker) {
 }
 void CPlayer::update_clicked_position_of_current_checker(const dot& new_pos) {
     current_checker->update_clicked_position(new_pos);
+
+    // help
+    for (auto iter = checkers.begin(); iter != checkers.end(); iter++) {
+        if (iter->get_itself() != current_checker) {
+            help_func(*current_checker, *iter->get_itself());
+        }
+    }
+
 }
 
 void CPlayer::move_checker() {

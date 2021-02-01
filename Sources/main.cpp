@@ -49,15 +49,15 @@ const int W = 640;
 const int H = 480;
 
 int main() {
-    CVector v1(2, 3);
+    CVector v1(2, 0);
     v1.output_vector();
-    CVector v2(-2, 7);
-    v2.output_vector();
 
-    CVector v3 = v1 + v2;
+    v1.rotate_by_angle(3.14/2);
 
-    v3.output_vector();
+    v1.output_vector();
+
     return 0;
+
     float center1_x = W / 4;
     float center1_y = H / 2;
 
